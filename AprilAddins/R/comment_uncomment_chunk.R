@@ -14,7 +14,7 @@ comment_chunk_addin <- function() {
   #  rstudioapi::insertText(c(row, 1), '#')
   #}
   pos <- Map(c, start_row:end_row, 1)
-  insertText(pos, "#")
+  rstudioapi::insertText(pos, "#")
   
 }
 
@@ -40,15 +40,11 @@ uncomment_chunk_addin <- function() {
   idx <- which(substr(trimws(row_str[[1]]), 1, 1) == '#')
   pos <- regexpr("#", row_str[[1]])
   
-  rng <- Map(c, Map(c, 1:5, 1), Map(c, 1:5, 3))
-  modifyRange(rng, "")
-  
-  
   for (i in idx){
     
     row <- (start_row:end_row)[i]
     p <- pos[idx]
-    modifyRange(c(row, p), "")
+    rstudioapi::modifyRange(c(row, p), "")
   }
  
 }
