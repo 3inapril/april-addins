@@ -1,0 +1,12 @@
+Package: AprilAddins
+Title: Some R Addins
+Version: 0.0.0.9000
+Authors@R: person("April", "Liu", email = "3inapril@gmail.com", role = c("aut", "cre"))
+Description: This package contains some simple R addins that save manual work in code writing
+Depends:
+    R (>= 3.2.3)
+Imports:
+    rstudioapi
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
