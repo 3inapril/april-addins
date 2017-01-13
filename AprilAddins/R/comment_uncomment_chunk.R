@@ -1,6 +1,6 @@
-  ' Comment out the highlighted code chunk
- # 
- #' Call this as an addin to comment out selected rows by inserting a pound # 
+#' Comment out the highlighted code chunk
+#' 
+#' Call this as an addin to comment out selected rows by inserting a pound # 
 #' in front of the row
 #'
 #' @export
