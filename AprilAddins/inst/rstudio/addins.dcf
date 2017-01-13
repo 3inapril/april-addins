@@ -1,0 +1,10 @@
+Name: comment out highlighted code chunk
+Description: Inserts pound # to comment out each line of highlighted code
+Binding: comment_chunk_addin
+Interactive: false
+
+Name: uncomment highlighted code chunk
+Description: Deletes leading pound in the highlighted code chunk
+Binding: uncomment_chunk_addin
+Interactive: false
+
