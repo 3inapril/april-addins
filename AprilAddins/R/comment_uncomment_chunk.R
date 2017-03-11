@@ -7,14 +7,9 @@
 comment_chunk_addin <- function() {
 
   context <- rstudioapi::getActiveDocumentContext()
-  start_row <- context$selection[[1]]$range$start[1]
-  end_row <- context$selection[[1]]$range$end[1]
-  
-  #for (row in start_row:end_row){
-  #  rstudioapi::insertText(c(row, 1), '#')
-  #}
-  pos <- Map(c, start_row:end_row, 1)
-  rstudioapi::insertText(pos, "#")
+  rows_to_comment <- identify_not_comment_rows(context)
+  pos <- Map(c, rows_to_comment, 1)
+  rstudioapi::insertText(pos, "# ")
   
 }
 
@@ -43,6 +38,37 @@ uncomment_chunk_addin <- function() {
   cols <- as.numeric(col_seq+regexpr("#", row_str[[1]]))[rltv_idx]
   
   rng <- Map(c, Map(c, rows, cols), Map(c, rows, cols+1))
-  rstudioapi::modifyRange(rng, " ")
+  rstudioapi::modifyRange(rng, "")
  
+}
+
+#' a function that identify which selected rows are/are not commment rows
+identify_comment_rows <- function(context_obj){
+  
+  start_row <- context_obj$selection[[1]]$range$start[1]
+  end_row <- context_obj$selection[[1]]$range$end[1]
+  row_seq <- start_row:end_row
+  
+  # identify which rows are not already comment rows
+  sel_text <- context_obj$selection[[1]]$text
+  row_str <- strsplit(sel_text, '\n')
+  
+  rltv_idx <- which(substr(trimws(row_str[[1]]), 1, 1) == '#')
+  rows <- row_seq[rltv_idx]
+  return(rows)
+}
+
+identify_not_comment_rows <- function(context_obj){
+  
+  start_row <- context_obj$selection[[1]]$range$start[1]
+  end_row <- context_obj$selection[[1]]$range$end[1]
+  row_seq <- start_row:end_row
+  
+  # identify which rows are not already comment rows
+  sel_text <- context_obj$selection[[1]]$text
+  row_str <- strsplit(sel_text, '\n')
+  
+  rltv_idx <- which(substr(trimws(row_str[[1]]), 1, 1) != '#')
+  rows <- row_seq[rltv_idx]
+  return(rows)
 }
